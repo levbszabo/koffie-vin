@@ -1,0 +1,49 @@
+Implement a simple FastAPI backend to decode VINs, powered by the vPIC API and backed by a SQLite cache.
+
+##1. 
+/lookup
+
+This route will first check the SQLite database to see if a cached result is available. If so, it should be returned from the database.
+
+If not, your API should contact the vPIC API to decode the VIN, store the results in the database, and return the result.
+
+The request should contain a single string called "vin". It should contain exactly 17 alphanumeric characters.
+
+The response object should contain the following elements:
+
+Input VIN Requested (string, exactly 17 alphanumeric characters)
+Make (String)
+Model (String)
+Model Year (String)
+Body Class (String)
+Cached Result? (Boolean)
+
+##2. 
+/remove
+
+This route will remove a entry from the cache.
+
+The request should contain a single string called "vin". It should contain exactly 17 alphanumeric characters.
+
+The response object should contain the following elements:
+
+Input VIN Requested (string, exactly 17 alphanumeric characters)
+Cache Delete Success? (boolean)
+
+
+##3.
+/export
+
+This route will export the SQLite database cache and return a binary file (parquet format) containing the data in the cache.
+
+No additional input/data should be required to make the request.
+
+The response object should be a binary file downloaded by the client containing all currently cached VINs in a table stored in parquet format.
+
+
+##Test Cases:
+
+Test VINs
+You may use the following test VINs. We encourage you to try VINs you may find from other sources!
+
+1XPWD40X1ED215307 1XKWDB0X57J211825 1XP5DB9X7YN526158 4V4NC9EJXEN171694 1XP5DB9X7XD487964
